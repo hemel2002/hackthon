@@ -55,7 +55,8 @@ app.use((req, res, next) => {
 app.use("/admin", admin);
 app.use("/user", user);
 // app.use("/student", student);
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001; // Change the port number here
+
 app.get("/", (req, res) => {
   res.render("home/home");
 });

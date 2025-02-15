@@ -71,7 +71,7 @@
                     <a class="nav-link" href="#about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-light ms-2" href="login.html">Login</a>
+                    <a class="btn btn-outline-light ms-2" href="user">Login</a>
                 </li>
             </ul>
         </div>
@@ -91,7 +91,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="/hackthon/Public/images/1.jpg" 
+                <img src="<%- localhost %>/images/1.jpg" 
                      alt="Financial Security" 
                      class="img-fluid rounded-4 feature-image">
             </div>
@@ -110,7 +110,7 @@
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="card h-70 border-0 shadow">
-                    <img src="/hackthon/Public/images/5.svg" 
+                    <img src="<%= localhost %>/images/5.svg" 
                          class="card-img-top" 
                          alt="Dashboard Feature" style="height: 50%;">
                     <div class="card-body">
@@ -121,7 +121,7 @@
             </div>
             <div class="col-md-6">
                 <div class="card h-70 border-0 shadow">
-                    <img src="/hackthon/Public/images/4.svg" 
+                    <img src="<%- localhost %>/images/4.svg" 
                          class="card-img-top" 
                          alt="Security Feature" style="height: 50%;">
                     <div class="card-body">
@@ -162,27 +162,25 @@
                 <h5 class="mb-3"><i class="fas fa-shield-alt me-2"></i>FinGuard</h5>
                 <p class="text-muted">Empowering financial security through AI and machine learning technologies.</p>
                 <div class="d-flex gap-3">
-                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-github"></i></a>
+                    <a href="https://x.com/aref_104" class="text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/sajedullah-aref/" class="text-white"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/rf104" class="text-white"><i class="fab fa-github"></i></a>
                 </div>
             </div>
             <div class="col-md-2">
-                <h5 class="mb-3">Company</h5>
+                <h5 class="mb-3" style="color: azure; font: bold;">Company</h5>
                 <ul class="list-unstyled footer-links">
-                    <li class="mb-2"><a href="#">About Us</a></li>
-                    <li class="mb-2"><a href="#">Careers</a></li>
-                    <li class="mb-2"><a href="#">Blog</a></li>
-                    <li class="mb-2"><a href="#">Partners</a></li>
+                    <li class="mb-1"><a href="#">About Us</a></li>
+                    <li class="mb-1"><a href="#">Blog</a></li>
+                    <li class="mb-1"><a href="#">Partners</a></li>
                 </ul>
             </div>
             <div class="col-md-2">
-                <h5 class="mb-3">Legal</h5>
+                <h5 class="mb-3" style="color: azure; font: bold;">Legal</h5>
                 <ul class="list-unstyled footer-links">
-                    <li class="mb-2"><a href="#">Privacy</a></li>
-                    <li class="mb-2"><a href="#">Terms</a></li>
-                    <li class="mb-2"><a href="#">Security</a></li>
-                    <li class="mb-2"><a href="#">GDPR</a></li>
+                    <li class="mb-1"><a href="#">Privacy</a></li>
+                    <li class="mb-1"><a href="#">Terms</a></li>
+                    <li class="mb-1"><a href="#">Security</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
