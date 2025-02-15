@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const User = require("../db/user");
 const flash = require("connect-flash");
 const MongooseConnection = require("../db/MongooseConnection");
+const Transaction = require("../db/transaction"); // Add this line
 
 // Signup Form
 router.get("/signup", (req, res) => {
@@ -98,6 +99,8 @@ router.post("/login", async (req, res) => {
     if (user.email == "kingaref13@gmail.com") {
       return res.redirect("/admin/");
     }
+    const transactions = await Transaction.find({ email });
+    console.log(transactions);
 
     res.redirect("/user/");
   } catch (err) {

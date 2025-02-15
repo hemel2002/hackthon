@@ -24,6 +24,7 @@ const getWirelessIP = require("./routes/GetWirelessIp");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const requireLogin = require("./routes/RequireLoginMiddleware");
 const auth = require('./routes/auth');
+const PORT = process.env.PORT || 3001;
 ///connect .env file
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -49,30 +50,24 @@ app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.localhost = `http://${getWirelessIP()}:${PORT}`;
+
   res.locals.UserId = req.session.UserId;
   res.locals.accountType = req.session.accountType;
   next();
 });
 app.use("/admin", admin);
 app.use("/user", user);
-// app.use("/student", student);
-const PORT = process.env.PORT || 3001; // Change the port number here
+
 
 app.get("/", (req, res) => {
+  
   res.render("home/home");
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`http://localhost:${PORT}/`);
-});
-
-// app.js
-// Add this after other route imports
 
 
-// Add this before other route middlewares
+
 app.use('/auth', auth);
 
 // Update existing route
@@ -92,4 +87,8 @@ app.post('/logout', (req, res) => {
       res.clearCookie('connect.sid'); // Clear the session cookie
       res.status(200).send('Logout successful');
   });
+});
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`http://localhost:${PORT}/`);
 });
