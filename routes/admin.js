@@ -7,7 +7,7 @@ const MongooseConnection = require("../db/MongooseConnection");
 const express = require("express");
 const { default: mongoose, model } = require("mongoose");
 const router = express.Router();
-router.get("/admin", (req, res) => {
+router.get("/", (req, res) => {
   res.render("admin/admin");
 });
 module.exports = router;
