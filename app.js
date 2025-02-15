@@ -15,7 +15,7 @@ const cloudinary = require("cloudinary").v2;
 const { Cloudinary } = require("cloudinary");
 const MongooseConnection = require("./db/MongooseConnection");
 const admin = require("./routes/admin");
-
+const user = require("./routes/user");
 const hashPass = require("./function/hashing");
 const app = express();
 const sendOtpEmail = require("./routes/email");
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/admin", admin);
-// app.use("/teacher", teacher);
+app.use("/user", user);
 // app.use("/student", student);
 const PORT = process.env.PORT;
 
