@@ -60,9 +60,10 @@ app.get("/", (req, res) => {
   res.render("home/home");
 });
 app.get("/login&signup", (req, res) => {
-  res.render("home/home");
+  res.render("home/signin");
 });
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`http://localhost:${PORT}/home`);
+  console.log(`http://localhost:${PORT}/`);
 });
