@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinGuard HACKATON</title>
+    <title>FinGuard - Financial Dashboard</title>
     <!-- MDB CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -88,13 +88,13 @@
             <div class="card mt-4 shadow-3">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-exchange-alt me-2"></i>New Transaction</h5>
-                    <form id="transactionForm" method="get" action="/user/transaction">
+                    <form id="transactionForm" onsubmit="handleTransaction(event)">
                         <div class="form-outline mb-3">
-                            <input type="number" id="amount" name="amount" class="form-control" required>
+                            <input type="number" id="amount" class="form-control" required>
                             <label class="form-label" for="amount">Amount ($)</label>
                         </div>
                         <div class="form-outline mb-3">
-                            <input type="text" id="recipient" name="recipient" class="form-control" required>
+                            <input type="text" id="recipient" class="form-control" required>
                             <label class="form-label" for="recipient">Recipient</label>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
@@ -107,12 +107,34 @@
 
         <!-- Middle Column -->
         <div class="col-lg-4">
-            <!-- Transaction History -->
+            <!-- Recent Transactions -->
             <div class="card shadow-3">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-history me-2"></i>Recent Transactions</h5>
                     <div id="transactionList" class="mt-3">
-                        <!-- Transactions will be loaded here -->
+                        <% if (transactionIds && transactionIds.length > 0) { %>
+                            <% transactionIds.forEach(function(transactionId) { %>
+                                <div class="transaction-card card mb-2">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h6 class="mb-0">Transaction ID: <%= transactionId %></h6>
+                                                <small class="text-muted">Details for transaction <%= transactionId %></small>
+                                            </div>
+                                            <div class="text-end">
+                                                <h5 class="text-success mb-0">
+                                                    <!-- Placeholder for transaction amount -->
+                                                    $0.00
+                                                </h5>
+                                                <span class="badge bg-success">Completed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <p>No recent transactions found.</p>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -175,7 +197,7 @@
         loadTransactions();
         loadAIRecommendations();
         loadLeaderboard();
-        initializeRevenueChart(); // Add this line
+        initializeRevenueChart();
     });
 
     // Handle Transaction
@@ -296,7 +318,8 @@
 
         document.getElementById('leaderboard').innerHTML = leaderboardHTML;
     }
-    // // Logout
+
+    // Logout
     function logout() {
         fetch('/logout', {
             method: 'POST',
@@ -313,15 +336,6 @@
             console.error('Error:', error);
         });
     }
-
-    // Chart
-    // Initialize everything when page loads
-    document.addEventListener('DOMContentLoaded', () => {
-        loadTransactions();
-        loadAIRecommendations();
-        loadLeaderboard();
-        initializeRevenueChart(); // Add this line
-    });
 
     // Chart Implementation
     function initializeRevenueChart() {
@@ -372,7 +386,6 @@
         // Create the chart
         new Chart(ctx, config);
     }
-
 </script>
 </body>
 </html>

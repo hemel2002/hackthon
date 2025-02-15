@@ -89,7 +89,14 @@ router.get("/transaction", async (req, res) => {
 
 router.get("/", (req, res) => {
   console.log(req.session.user);
-  res.render("user/user", { user: req.session.user });
+  let transactionIds = [];
+  if (req.query.transactionId) {
+    if (Array.isArray(req.query.transactionId)) {
+      transactionIds = req.query.transactionId;
+    } else {
+      transactionIds = [req.query.transactionId];
+    }
+  }
+  res.render("user/user", { user: req.session.user, transactionIds });
 });
-
 module.exports = router;

@@ -99,8 +99,13 @@ router.post("/login", async (req, res) => {
     if (user.email == "kingaref13@gmail.com") {
       return res.redirect("/admin/");
     }
-    const transactions = await Transaction.find({ email });
+    const transactions = await Transaction.find({ userId: user._id });
     console.log(transactions);
+    if (transactions.length > 0) {
+        req.session.transactions = transactions;
+        const transactionQuery = transactions.map(t => `transactionId=${t._id}`).join('&');
+        return res.redirect(`/user/?${transactionQuery}`);
+      }
 
     res.redirect("/user/");
   } catch (err) {
