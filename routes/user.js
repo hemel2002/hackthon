@@ -8,6 +8,6 @@ const express = require("express");
 const { default: mongoose, model } = require("mongoose");
 const router = express.Router();
 router.get("/", (req, res) => {
-  res.render("admin/admin");
+  res.render("user/user");
 });
 module.exports = router;
