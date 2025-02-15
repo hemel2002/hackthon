@@ -8,6 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .chart-container {
             height: 300px;
@@ -147,12 +149,21 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Chart -->
+            <div class="card shadow-3 mt-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-chart-line me-2"></i>Revenue Overview</h5>
+                    <canvas id="revenueChart" style="height: 200px"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- MDB JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Dummy Data
     let transactions = [];
@@ -164,6 +175,7 @@
         loadTransactions();
         loadAIRecommendations();
         loadLeaderboard();
+        initializeRevenueChart(); // Add this line
     });
 
     // Handle Transaction
@@ -270,8 +282,8 @@
     // Leaderboard
     function loadLeaderboard() {
         const leaders = [
-            {name: "Alice", saved: 4500},
-            {name: "Bob", saved: 3800},
+            {name: "Aref", saved: 4500},
+            {name: "Hemal", saved: 3800},
             {name: "Charlie", saved: 3200}
         ];
 
@@ -284,10 +296,83 @@
 
         document.getElementById('leaderboard').innerHTML = leaderboardHTML;
     }
-
+    // Logout
     function logout() {
-        // Implement logout logic
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                alert('Logout failed');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
     }
+
+    // Chart
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        loadTransactions();
+        loadAIRecommendations();
+        loadLeaderboard();
+        initializeRevenueChart(); // Add this line
+    });
+
+    // Chart Implementation
+    function initializeRevenueChart() {
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        
+        // Dummy data for the chart
+        const data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            datasets: [{
+                label: 'Monthly Expenses',
+                data: [650, 590, 800, 810, 560, 550, 400],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                tension: 0.4
+            },
+            {
+                label: 'Monthly Income',
+                data: [1200, 1300, 1250, 1400, 1150, 1350, 1100],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                tension: 0.4
+            }]
+        };
+
+        // Chart configuration
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Financial Overview'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Create the chart
+        new Chart(ctx, config);
+    }
+
 </script>
 </body>
 </html>

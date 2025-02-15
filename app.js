@@ -83,3 +83,13 @@ app.get("/login", (req, res) => {
 app.get("/signup", (req, res) => {
   res.redirect('/auth/signup');
 });
+
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+      if (err) {
+          return res.status(500).send('Logout failed');
+      }
+      res.clearCookie('connect.sid'); // Clear the session cookie
+      res.status(200).send('Logout successful');
+  });
+});
