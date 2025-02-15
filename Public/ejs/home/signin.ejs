@@ -93,8 +93,8 @@
 
       button {
         border-radius: 20px;
-        border: 1px solid #ff4b2b;
-        background: #ff4b2b;
+        border: 1px solid #fb7878;
+        background: #ff4141;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
@@ -125,8 +125,8 @@
       }
 
       .overlay {
-        background: #ff416c;
-        background: linear-gradient(to right, #ff4b2b, #ff416c);
+        background: #0445f8;
+        background: linear-gradient(to right, #021947, #41a6ff);
         color: #fff;
         position: relative;
         left: -100%;
@@ -203,23 +203,23 @@
     <div class="container" id="container">
       <!-- Signup Form -->
       <div class="form-container signup-container">
-        <form action="#" method="post">
+        <form action="/auth/signup" method="post">
           <h1>Create Account</h1>
           <span>or use your email for registration</span>
-          <input type="text" placeholder="Name" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+          <input type="text" name="name"  placeholder="Name" required />
+          <input type="email" name ="email" placeholder="Email" required />
+          <input type="password" name="password" placeholder="Password" required />
           <button type="submit">Sign Up</button>
         </form>
       </div>
 
       <!-- Login Form -->
       <div class="form-container login-container">
-        <form action="#" method="post">
+        <form action="/auth/login" method="post">
           <h1>Sign In</h1>
           <span>or use your account</span>
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="password" name="password" placeholder="Password" required />
           <a href="#">Forgot your password?</a>
           <button type="submit">Sign In</button>
         </form>

@@ -15,7 +15,6 @@ const sendOtpEmail = async (email, subject, message) => {
     connectionTimeout: 60000,
     debug: true,
   });
-
   try {
     const info = await transporter.sendMail({
       from: process.env.Email_username,

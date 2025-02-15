@@ -23,6 +23,7 @@ const { PASSWORD_RESET_REQUEST_TEMPLATE } = require("./routes/EmailTemp");
 const getWirelessIP = require("./routes/GetWirelessIp");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const requireLogin = require("./routes/RequireLoginMiddleware");
+const auth = require('./routes/auth');
 ///connect .env file
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -60,10 +61,25 @@ const PORT = process.env.PORT || 3001; // Change the port number here
 app.get("/", (req, res) => {
   res.render("home/home");
 });
-app.get("/login&signup", (req, res) => {
-  res.render("home/home");
-});
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`http://localhost:${PORT}/home`);
+  console.log(`http://localhost:${PORT}/`);
+});
+
+// app.js
+// Add this after other route imports
+
+
+// Add this before other route middlewares
+app.use('/auth', auth);
+
+// Update existing route
+app.get("/login", (req, res) => {
+  res.redirect('/auth/login');
+});
+
+app.get("/signup", (req, res) => {
+  res.redirect('/auth/signup');
 });
