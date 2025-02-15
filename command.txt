@@ -8,5 +8,7 @@ npm install dotenv
 npm install bcrypt  
 npm install axios
 npm install openai
-
+npm install multer      
+ npm install multer-storage-cloudinary
+ npm install uuid 
 4242 4242 4242 4242

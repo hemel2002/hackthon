@@ -56,7 +56,12 @@ app.use("/admin", admin);
 app.use("/user", user);
 // app.use("/student", student);
 const PORT = process.env.PORT;
-
+app.get("/", (req, res) => {
+  res.render("home/home");
+});
+app.get("/login&signup", (req, res) => {
+  res.render("home/home");
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`http://localhost:${PORT}/home`);
