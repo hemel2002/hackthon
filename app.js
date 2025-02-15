@@ -14,6 +14,7 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
 const { Cloudinary } = require("cloudinary");
 const MongooseConnection = require("./db/MongooseConnection");
+const admin = require("./routes/admin");
 
 const hashPass = require("./function/hashing");
 const app = express();
@@ -51,7 +52,7 @@ app.use((req, res, next) => {
   res.locals.accountType = req.session.accountType;
   next();
 });
-// app.use("/admin", admin);
+app.use("/admin", admin);
 // app.use("/teacher", teacher);
 // app.use("/student", student);
 const PORT = process.env.PORT;
